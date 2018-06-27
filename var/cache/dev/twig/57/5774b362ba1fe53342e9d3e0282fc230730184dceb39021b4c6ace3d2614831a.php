@@ -15,6 +15,7 @@ class __TwigTemplate_f402f4beaeb979b9b6ae60abcc6a3d74cdc810ef37ecd64a11840d9d6c4
         $this->parent = $this->loadTemplate("base.html.twig", "lift/index.html.twig", 1);
         $this->blocks = array(
             'body' => array($this, 'block_body'),
+            'stylesheets' => array($this, 'block_stylesheets'),
             'javascripts' => array($this, 'block_javascripts'),
         );
     }
@@ -61,67 +62,19 @@ class __TwigTemplate_f402f4beaeb979b9b6ae60abcc6a3d74cdc810ef37ecd64a11840d9d6c4
                 </tr>
                 </thead>
                 <tbody>
-                ";
-        // line 23
-        $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["repLogs"]) || array_key_exists("repLogs", $context) ? $context["repLogs"] : (function () { throw new Twig_Error_Runtime('Variable "repLogs" does not exist.', 23, $this->source); })()));
-        $context['_iterated'] = false;
-        $context['loop'] = array(
-          'parent' => $context['_parent'],
-          'index0' => 0,
-          'index'  => 1,
-          'first'  => true,
-        );
-        if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof Countable)) {
-            $length = count($context['_seq']);
-            $context['loop']['revindex0'] = $length - 1;
-            $context['loop']['revindex'] = $length;
-            $context['loop']['length'] = $length;
-            $context['loop']['last'] = 1 === $length;
-        }
-        foreach ($context['_seq'] as $context["_key"] => $context["repLog"]) {
-            // line 24
-            echo "                    ";
-            echo twig_include($this->env, $context, "lift/_repRow.html.twig");
-            echo "
-                ";
-            $context['_iterated'] = true;
-            ++$context['loop']['index0'];
-            ++$context['loop']['index'];
-            $context['loop']['first'] = false;
-            if (isset($context['loop']['length'])) {
-                --$context['loop']['revindex0'];
-                --$context['loop']['revindex'];
-                $context['loop']['last'] = 0 === $context['loop']['revindex0'];
-            }
-        }
-        if (!$context['_iterated']) {
-            // line 26
-            echo "                    <tr>
-                        <td colspan=\"4\">Get liftin'!</td>
-                    </tr>
-                ";
-        }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['repLog'], $context['_parent'], $context['loop']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 30
-        echo "                </tbody>
+                </tbody>
                 <tfoot>
                     <tr>
                         <td>&nbsp;</td>
                         <th>Total</th>
-                        <th class=\"js-total-weight\">";
-        // line 35
-        echo twig_escape_filter($this->env, (isset($context["totalWeight"]) || array_key_exists("totalWeight", $context) ? $context["totalWeight"] : (function () { throw new Twig_Error_Runtime('Variable "totalWeight" does not exist.', 35, $this->source); })()), "html", null, true);
-        echo "</th>
+                        <th class=\"js-total-weight\"></th>
                         <td>&nbsp;</td>
                     </tr>
                 </tfoot>
             </table>
             <div class=\"js-new-rep-log-form-wrapper\">
                 ";
-        // line 41
+        // line 34
         echo twig_include($this->env, $context, "lift/_form.html.twig");
         echo "
             </div>
@@ -130,14 +83,14 @@ class __TwigTemplate_f402f4beaeb979b9b6ae60abcc6a3d74cdc810ef37ecd64a11840d9d6c4
             <div class=\"leaderboard\">
                 <h2 class=\"text-center\">
                     <img class=\"dumbbell\" src=\"";
-        // line 47
+        // line 40
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/images/dumbbell.png"), "html", null, true);
         echo "\" />
                     Leaderboard
                 </h2>
 
                 ";
-        // line 51
+        // line 44
         echo twig_include($this->env, $context, "lift/_leaderboard.html.twig");
         echo "
             </div>
@@ -150,20 +103,40 @@ class __TwigTemplate_f402f4beaeb979b9b6ae60abcc6a3d74cdc810ef37ecd64a11840d9d6c4
 
     }
 
-    // line 57
+    // line 51
+    public function block_stylesheets($context, array $blocks = array())
+    {
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
+
+        // line 52
+        echo "    ";
+        $this->displayParentBlock("stylesheets", $context, $blocks);
+        echo "
+    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/sweetalert2/6.1.0/sweetalert2.min.css\" />
+";
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+    }
+
+    // line 56
     public function block_javascripts($context, array $blocks = array())
     {
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 58
+        // line 57
         echo "     ";
         $this->displayParentBlock("javascripts", $context, $blocks);
         echo "
+
+    <script src=\"https://cdn.jsdelivr.net/sweetalert2/6.1.0/sweetalert2.min.js\"></script>
     <script src=\"";
-        // line 59
+        // line 60
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/RepLogApp.js"), "html", null, true);
         echo "\"></script>
+
 
     <script>
 
@@ -172,6 +145,23 @@ class __TwigTemplate_f402f4beaeb979b9b6ae60abcc6a3d74cdc810ef37ecd64a11840d9d6c4
             var repLogRep = new RepLogApp(\$wrapper);
         });
      </script>
+
+    <script type=\"text/template\" id=\"js-rep-log-row-template\">
+        <tr data-weight=\"<%= totalWeightLifted %>\">
+            <td><%= itemLabel %></td>
+            <td><%= reps %></td>
+            <td><%= totalWeightLifted %></td>
+            <td>
+                <a href=\"#\"
+                   class=\"js-delete-rep-log\"
+                   data-url=\"<%= links._self %>\"
+                >
+                    <span class=\"fa fa-trash\"></span>
+                </a>
+            </td>
+        </tr>
+    </script>
+
  ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -190,7 +180,7 @@ class __TwigTemplate_f402f4beaeb979b9b6ae60abcc6a3d74cdc810ef37ecd64a11840d9d6c4
 
     public function getDebugInfo()
     {
-        return array (  165 => 59,  160 => 58,  154 => 57,  141 => 51,  134 => 47,  125 => 41,  116 => 35,  109 => 30,  100 => 26,  84 => 24,  66 => 23,  45 => 4,  39 => 3,  15 => 1,);
+        return array (  137 => 60,  130 => 57,  124 => 56,  113 => 52,  107 => 51,  94 => 44,  87 => 40,  78 => 34,  46 => 4,  40 => 3,  15 => 1,);
     }
 
     public function getSourceContext()
@@ -217,19 +207,12 @@ class __TwigTemplate_f402f4beaeb979b9b6ae60abcc6a3d74cdc810ef37ecd64a11840d9d6c4
                 </tr>
                 </thead>
                 <tbody>
-                {% for repLog in repLogs %}
-                    {{ include('lift/_repRow.html.twig') }}
-                {% else %}
-                    <tr>
-                        <td colspan=\"4\">Get liftin'!</td>
-                    </tr>
-                {% endfor %}
                 </tbody>
                 <tfoot>
                     <tr>
                         <td>&nbsp;</td>
                         <th>Total</th>
-                        <th class=\"js-total-weight\">{{ totalWeight }}</th>
+                        <th class=\"js-total-weight\"></th>
                         <td>&nbsp;</td>
                     </tr>
                 </tfoot>
@@ -251,9 +234,18 @@ class __TwigTemplate_f402f4beaeb979b9b6ae60abcc6a3d74cdc810ef37ecd64a11840d9d6c4
     </div>
 
 {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/sweetalert2/6.1.0/sweetalert2.min.css\" />
+{% endblock %}
+
 {% block javascripts %}
      {{ parent() }}
+
+    <script src=\"https://cdn.jsdelivr.net/sweetalert2/6.1.0/sweetalert2.min.js\"></script>
     <script src=\"{{ asset('assets/js/RepLogApp.js') }}\"></script>
+
 
     <script>
 
@@ -262,6 +254,23 @@ class __TwigTemplate_f402f4beaeb979b9b6ae60abcc6a3d74cdc810ef37ecd64a11840d9d6c4
             var repLogRep = new RepLogApp(\$wrapper);
         });
      </script>
+
+    <script type=\"text/template\" id=\"js-rep-log-row-template\">
+        <tr data-weight=\"<%= totalWeightLifted %>\">
+            <td><%= itemLabel %></td>
+            <td><%= reps %></td>
+            <td><%= totalWeightLifted %></td>
+            <td>
+                <a href=\"#\"
+                   class=\"js-delete-rep-log\"
+                   data-url=\"<%= links._self %>\"
+                >
+                    <span class=\"fa fa-trash\"></span>
+                </a>
+            </td>
+        </tr>
+    </script>
+
  {% endblock %}
 ", "lift/index.html.twig", "/Users/imac/Documents/sites_acasa/js/app/Resources/views/lift/index.html.twig");
     }

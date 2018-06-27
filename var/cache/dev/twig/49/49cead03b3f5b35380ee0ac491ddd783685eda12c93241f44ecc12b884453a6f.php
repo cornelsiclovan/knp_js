@@ -184,7 +184,7 @@ class __TwigTemplate_f20c957bc39169358dfd6fbb22d71a35ffd64f63b81ca8a80ebaf5329d0
 ";
         // line 91
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 95
+        // line 99
         echo "</body>
 </html>
 ";
@@ -255,6 +255,16 @@ class __TwigTemplate_f20c957bc39169358dfd6fbb22d71a35ffd64f63b81ca8a80ebaf5329d0
         // line 92
         echo "    <script src=\"https://code.jquery.com/jquery-3.1.1.min.js\" integrity=\"sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=\" crossorigin=\"anonymous\"></script>
     <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\" integrity=\"sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa\" crossorigin=\"anonymous\"></script>
+    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js\"></script>
+    <script src=\"";
+        // line 95
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("bundles/fosjsrouting/js/router.min.js"), "html", null, true);
+        echo "\"></script>
+    <script src=\"";
+        // line 96
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fos_js_routing_js", array("callback" => "fos.Router.setData"));
+        echo "\"></script>
+    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.0.5/es6-promise.auto.min.js\"></script>
 ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -273,7 +283,7 @@ class __TwigTemplate_f20c957bc39169358dfd6fbb22d71a35ffd64f63b81ca8a80ebaf5329d0
 
     public function getDebugInfo()
     {
-        return array (  256 => 92,  250 => 91,  239 => 81,  228 => 70,  219 => 14,  215 => 12,  209 => 11,  197 => 9,  188 => 95,  186 => 91,  178 => 86,  172 => 82,  170 => 81,  167 => 80,  161 => 79,  152 => 76,  147 => 75,  142 => 74,  138 => 73,  134 => 71,  132 => 70,  125 => 65,  116 => 59,  112 => 57,  100 => 48,  92 => 43,  88 => 42,  82 => 39,  78 => 37,  76 => 36,  70 => 33,  51 => 17,  48 => 16,  46 => 11,  41 => 9,  31 => 1,);
+        return array (  265 => 96,  261 => 95,  256 => 92,  250 => 91,  239 => 81,  228 => 70,  219 => 14,  215 => 12,  209 => 11,  197 => 9,  188 => 99,  186 => 91,  178 => 86,  172 => 82,  170 => 81,  167 => 80,  161 => 79,  152 => 76,  147 => 75,  142 => 74,  138 => 73,  134 => 71,  132 => 70,  125 => 65,  116 => 59,  112 => 57,  100 => 48,  92 => 43,  88 => 42,  82 => 39,  78 => 37,  76 => 36,  70 => 33,  51 => 17,  48 => 16,  46 => 11,  41 => 9,  31 => 1,);
     }
 
     public function getSourceContext()
@@ -371,6 +381,10 @@ class __TwigTemplate_f20c957bc39169358dfd6fbb22d71a35ffd64f63b81ca8a80ebaf5329d0
 {% block javascripts %}
     <script src=\"https://code.jquery.com/jquery-3.1.1.min.js\" integrity=\"sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=\" crossorigin=\"anonymous\"></script>
     <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\" integrity=\"sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa\" crossorigin=\"anonymous\"></script>
+    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js\"></script>
+    <script src=\"{{ asset('bundles/fosjsrouting/js/router.min.js') }}\"></script>
+    <script src=\"{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}\"></script>
+    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.0.5/es6-promise.auto.min.js\"></script>
 {% endblock %}
 </body>
 </html>

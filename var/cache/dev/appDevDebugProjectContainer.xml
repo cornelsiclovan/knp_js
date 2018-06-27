@@ -18,6 +18,7 @@
       <parameter key="DoctrineMigrationsBundle">Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle</parameter>
       <parameter key="FOSUserBundle">FOS\UserBundle\FOSUserBundle</parameter>
       <parameter key="DoctrineFixturesBundle">Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle</parameter>
+      <parameter key="FOSJsRoutingBundle">FOS\JsRoutingBundle\FOSJsRoutingBundle</parameter>
       <parameter key="AppBundle">AppBundle\AppBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
@@ -74,6 +75,11 @@
         <parameter key="parent">null</parameter>
         <parameter key="path">/Users/imac/Documents/sites_acasa/js/vendor/doctrine/doctrine-fixtures-bundle</parameter>
         <parameter key="namespace">Doctrine\Bundle\FixturesBundle</parameter>
+      </parameter>
+      <parameter key="FOSJsRoutingBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/Users/imac/Documents/sites_acasa/js/vendor/friendsofsymfony/jsrouting-bundle</parameter>
+        <parameter key="namespace">FOS\JsRoutingBundle</parameter>
       </parameter>
       <parameter key="AppBundle" type="collection">
         <parameter key="parent">null</parameter>
@@ -437,6 +443,15 @@
       <parameter>ResetPassword</parameter>
       <parameter>Default</parameter>
     </parameter>
+    <parameter key="fos_js_routing.extractor.class">FOS\JsRoutingBundle\Extractor\ExposedRoutesExtractor</parameter>
+    <parameter key="fos_js_routing.controller.class">FOS\JsRoutingBundle\Controller\Controller</parameter>
+    <parameter key="fos_js_routing.normalizer.route_collection.class">FOS\JsRoutingBundle\Serializer\Normalizer\RouteCollectionNormalizer</parameter>
+    <parameter key="fos_js_routing.normalizer.routes_response.class">FOS\JsRoutingBundle\Serializer\Normalizer\RoutesResponseNormalizer</parameter>
+    <parameter key="fos_js_routing.denormalizer.route_collection.class">FOS\JsRoutingBundle\Serializer\Denormalizer\RouteCollectionDenormalizer</parameter>
+    <parameter key="fos_js_routing.request_context_base_url">null</parameter>
+    <parameter key="fos_js_routing.cache_control" type="collection">
+      <parameter key="enabled">false</parameter>
+    </parameter>
     <parameter key="web_profiler.debug_toolbar.position">bottom</parameter>
     <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
     <parameter key="web_profiler.debug_toolbar.mode">2</parameter>
@@ -507,6 +522,8 @@
       </parameter>
     </parameter>
     <parameter key="console.command.ids" type="collection">
+      <parameter>fos_js_routing.dump_command</parameter>
+      <parameter>fos_js_routing.router_debug_exposed_command</parameter>
       <parameter>sensio_distribution.security_checker.command</parameter>
     </parameter>
   </parameters>
@@ -630,7 +647,7 @@
                   <tag name="cache.pool"/>
                   <argument>4YjhnflCfn</argument>
                   <argument>0</argument>
-                  <argument>cXG0sGn9k0C3q1cu0VbE1k</argument>
+                  <argument>SokcuraJ-53JxBd2VA-nRY</argument>
                   <argument>/Users/imac/Documents/sites_acasa/js/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -643,7 +660,7 @@
                   <tag name="cache.pool"/>
                   <argument>LTMOOXnH9C</argument>
                   <argument>0</argument>
-                  <argument>cXG0sGn9k0C3q1cu0VbE1k</argument>
+                  <argument>SokcuraJ-53JxBd2VA-nRY</argument>
                   <argument>/Users/imac/Documents/sites_acasa/js/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1295,7 +1312,7 @@
       <tag name="cache.pool"/>
       <argument>g+YTz8hQeh</argument>
       <argument>0</argument>
-      <argument>cXG0sGn9k0C3q1cu0VbE1k</argument>
+      <argument>SokcuraJ-53JxBd2VA-nRY</argument>
       <argument>/Users/imac/Documents/sites_acasa/js/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -2139,7 +2156,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>5b327cb0c27024.13292366</argument>
+            <argument>5b33de96306ad9.36531324</argument>
           </service>
         </argument>
       </argument>
@@ -2407,7 +2424,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>5b327cb0c27024.13292366</argument>
+            <argument>5b33de96306ad9.36531324</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -3073,6 +3090,67 @@
       <argument type="service" id="router"/>
       <argument>86400</argument>
     </service>
+    <service id="fos_js_routing.extractor" class="FOS\JsRoutingBundle\Extractor\ExposedRoutesExtractor">
+      <argument type="service" id="router"/>
+      <argument type="collection"/>
+      <argument>/Users/imac/Documents/sites_acasa/js/var/cache/dev</argument>
+      <argument type="collection">
+        <argument key="FrameworkBundle">Symfony\Bundle\FrameworkBundle\FrameworkBundle</argument>
+        <argument key="SecurityBundle">Symfony\Bundle\SecurityBundle\SecurityBundle</argument>
+        <argument key="TwigBundle">Symfony\Bundle\TwigBundle\TwigBundle</argument>
+        <argument key="MonologBundle">Symfony\Bundle\MonologBundle\MonologBundle</argument>
+        <argument key="SwiftmailerBundle">Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle</argument>
+        <argument key="DoctrineBundle">Doctrine\Bundle\DoctrineBundle\DoctrineBundle</argument>
+        <argument key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</argument>
+        <argument key="DoctrineMigrationsBundle">Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle</argument>
+        <argument key="FOSUserBundle">FOS\UserBundle\FOSUserBundle</argument>
+        <argument key="DoctrineFixturesBundle">Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle</argument>
+        <argument key="FOSJsRoutingBundle">FOS\JsRoutingBundle\FOSJsRoutingBundle</argument>
+        <argument key="AppBundle">AppBundle\AppBundle</argument>
+        <argument key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</argument>
+        <argument key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</argument>
+        <argument key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</argument>
+        <argument key="SensioGeneratorBundle">Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle</argument>
+      </argument>
+    </service>
+    <service id="fos_js_routing.dump_command" class="FOS\JsRoutingBundle\Command\DumpCommand">
+      <tag name="console.command"/>
+      <argument type="service" id="fos_js_routing.extractor"/>
+      <argument type="service" id="fos_js_routing.serializer"/>
+      <argument>/Users/imac/Documents/sites_acasa/js/app</argument>
+      <argument>null</argument>
+    </service>
+    <service id="fos_js_routing.router_debug_exposed_command" class="FOS\JsRoutingBundle\Command\RouterDebugExposedCommand">
+      <tag name="console.command"/>
+      <argument type="service" id="fos_js_routing.extractor"/>
+      <argument type="service" id="router"/>
+    </service>
+    <service id="fos_js_routing.controller" class="FOS\JsRoutingBundle\Controller\Controller">
+      <argument type="service" id="fos_js_routing.serializer"/>
+      <argument type="service" id="fos_js_routing.extractor"/>
+      <argument type="collection">
+        <argument key="enabled">false</argument>
+      </argument>
+      <argument>true</argument>
+    </service>
+    <service id="fos_js_routing.serializer" class="Symfony\Component\Serializer\Serializer">
+      <argument type="collection">
+        <argument type="service">
+          <service class="FOS\JsRoutingBundle\Serializer\Normalizer\RouteCollectionNormalizer" public="false"/>
+        </argument>
+        <argument type="service">
+          <service class="FOS\JsRoutingBundle\Serializer\Normalizer\RoutesResponseNormalizer" public="false"/>
+        </argument>
+        <argument type="service">
+          <service class="FOS\JsRoutingBundle\Serializer\Denormalizer\RouteCollectionDenormalizer" public="false"/>
+        </argument>
+      </argument>
+      <argument type="collection">
+        <argument key="json" type="service">
+          <service class="Symfony\Component\Serializer\Encoder\JsonEncoder" public="false"/>
+        </argument>
+      </argument>
+    </service>
     <service id="data_collector.dump" class="Symfony\Component\HttpKernel\DataCollector\DumpDataCollector">
       <tag name="data_collector" id="dump" template="@Debug/Profiler/dump.html.twig" priority="240"/>
       <argument type="service" id="debug.stopwatch" on-invalid="ignore"/>
@@ -3202,6 +3280,9 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
+      </call>
     </service>
     <service id="monolog.logger.translation" class="Symfony\Bridge\Monolog\Logger">
       <argument>translation</argument>
@@ -3210,6 +3291,9 @@
       </call>
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
       </call>
     </service>
     <service id="monolog.logger.cache" class="Symfony\Bridge\Monolog\Logger">
@@ -3220,6 +3304,9 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
+      </call>
     </service>
     <service id="monolog.logger.templating" class="Symfony\Bridge\Monolog\Logger">
       <argument>templating</argument>
@@ -3228,6 +3315,9 @@
       </call>
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
       </call>
     </service>
     <service id="monolog.logger.profiler" class="Symfony\Bridge\Monolog\Logger">
@@ -3238,6 +3328,9 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
+      </call>
     </service>
     <service id="monolog.logger.router" class="Symfony\Bridge\Monolog\Logger">
       <argument>router</argument>
@@ -3246,6 +3339,9 @@
       </call>
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
       </call>
     </service>
     <service id="monolog.logger.php" class="Symfony\Bridge\Monolog\Logger">
@@ -3256,11 +3352,14 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
+      </call>
     </service>
     <service id="monolog.logger.event" class="Symfony\Bridge\Monolog\Logger">
       <argument>event</argument>
       <call method="pushHandler">
-        <argument type="service" id="monolog.handler.null_internal"/>
+        <argument type="service" id="monolog.handler.debug"/>
       </call>
     </service>
     <service id="monolog.logger.security" class="Symfony\Bridge\Monolog\Logger">
@@ -3271,12 +3370,22 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
+      </call>
     </service>
     <service id="monolog.logger.doctrine" class="Symfony\Bridge\Monolog\Logger">
       <argument>doctrine</argument>
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
+      </call>
+    </service>
+    <service id="monolog.handler.debug" class="Symfony\Bridge\Monolog\Handler\DebugHandler">
+      <argument>100</argument>
+      <argument>true</argument>
     </service>
     <service id="monolog.handler.null_internal" class="Monolog\Handler\NullHandler"/>
     <service id="session.storage.filesystem" class="Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage">
@@ -3367,6 +3476,9 @@
       </call>
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
       </call>
       <autowiring-type>Psr\Log\LoggerInterface</autowiring-type>
     </service>
@@ -3526,6 +3638,8 @@
     <service id="doctrine.orm.default_result_cache" alias="doctrine_cache.providers.doctrine.orm.default_result_cache"/>
     <service id="doctrine.orm.default_query_cache" alias="doctrine_cache.providers.doctrine.orm.default_query_cache"/>
     <service id="fos_user.util.username_canonicalizer" alias="fos_user.util.email_canonicalizer"/>
+    <service id="console.command.fos_jsroutingbundle_command_dumpcommand" alias="fos_js_routing.dump_command"/>
+    <service id="console.command.fos_jsroutingbundle_command_routerdebugexposedcommand" alias="fos_js_routing.router_debug_exposed_command"/>
     <service id="console.command.sensiolabs_security_command_securitycheckercommand" alias="sensio_distribution.security_checker.command"/>
   </services>
 </container>

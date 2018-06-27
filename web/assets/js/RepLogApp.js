@@ -1,9 +1,11 @@
 'use strict';
 
-(function(window, $) {
+(function(window, $, Routing, swal) {
     window.RepLogApp = function ($wrapper) {
         this.$wrapper = $wrapper;
         this.helper = new Helper($wrapper);
+
+        this.loadRepLogs();
 
         this.$wrapper.on(
             'click',
@@ -29,6 +31,17 @@
             newRepForm: '.js-new-rep-log-form'
         },
 
+        loadRepLogs: function(){
+            var self = this;
+            $.ajax({
+                url: Routing.generate('rep_log_list'),
+            }).then(function(data) {
+                $.each(data.items, function (key, repLog) {
+                    self._addRow(repLog);
+                });
+            });
+        },
+
         updateTotalWeightLifted: function () {
             this.$wrapper.find('.js-total-weight').html(
                 this.helper.calculateTotalWeight()
@@ -39,7 +52,22 @@
             e.preventDefault();
 
             var $link = $(e.currentTarget);
+            var self = this;
+            swal({
+                title: 'Delete this log',
+                text: 'What? Did you not actually lift this?',
+                timer: 2000,
+                showCancelButton: true,
+                showLoaderOnConfirm: true,
+                preConfirm: function(){
+                    return self._deleteRepLog($link);
+                }
+            }).catch(function (arg) {
+                    //cancel is cool
+            });
+        },
 
+        _deleteRepLog: function($link){
             $link.addClass('text-danger');
             $link.find('.fa')
                 .removeClass('fa-trash')
@@ -51,15 +79,14 @@
 
             var self = this;
 
-            $.ajax({
+            return $.ajax({
                 url: deleteUrl,
                 method: 'DELETE',
-                success: function () {
-                    $row.fadeOut('normal', function () {
-                        $(this).remove(),
+            }).then(function() {
+                $row.fadeOut('normal', function () {
+                    $(this).remove(),
                         self.updateTotalWeightLifted();
-                    });
-                }
+                });
             });
         },
 
@@ -78,26 +105,38 @@
 
             var self = this;
 
-            $.ajax({
-                url: $form.data('url'),
-                method: 'POST',
-                data: JSON.stringify(formData),
-                success: function(data){
-                    //todo for later
-                    console.log('success');
-                },
-                error: function(jqXHR){
-                    //todo later
+            this._saveRepLog(formData)
+            .then(function (data) {
+                self._clearForm();
+                self._addRow(data);
+            }).catch(function(errorData){
+                self._mapErrorsToForm(errorData.errors);
+            })
+        },
+
+        _saveRepLog: function(data){
+            return new Promise(function(resolve, reject){
+                $.ajax({
+                    url: Routing.generate('rep_log_new'),
+                    method: 'POST',
+                    data: JSON.stringify(data)
+                }).then(function(data, textStatus, jqXHR){
+                    $.ajax({
+                        url: jqXHR.getResponseHeader('Location'),
+                    }).then(function(data){
+                        //we're finally done
+                        resolve(data);
+                    });
+                }).catch(function(jqXHR){
                     var errorData = JSON.parse(jqXHR.responseText);
-                    self._mapErrorsToForm(errorData.errors);
-                }
+                    reject(errorData);
+                });
             });
         },
 
         _mapErrorsToForm: function(errorData){
             var $form = this.$wrapper.find(this._selectors.newRepForm);
-            $form.find('.js-field-error').remove();
-            $form.find('.form-group').removeClass('has-error');
+            this._removeFromErrors();
 
             $form.find(':input').each(function(){
                 var fieldName = $(this).attr('name');
@@ -112,7 +151,29 @@
                 $wrapper.append($error);
                 $wrapper.addClass('has-error');
             });
+        },
+
+        _removeFromErrors: function(){
+            var $form = this.$wrapper.find(this._selectors.newRepForm);
+            $form.find('.js-field-error').remove();
+            $form.find('.form-group').removeClass('has-error');
+        },
+
+        _clearForm: function(){
+            this._removeFromErrors();
+            var $form = this.$wrapper.find(this._selectors.newRepForm);
+            $form[0].reset();
+        },
+        
+        _addRow: function (repLog) {
+            var tplText = $('#js-rep-log-row-template').html();
+            var tpl = _.template(tplText);
+
+            var html = tpl(repLog);
+            this.$wrapper.find('tbody').append($.parseHTML(html));
+            this.updateTotalWeightLifted();
         }
+
     });
 
 
@@ -135,4 +196,4 @@
         }
     });
 
-})(window, jQuery);
+})(window, jQuery, Routing, swal);
