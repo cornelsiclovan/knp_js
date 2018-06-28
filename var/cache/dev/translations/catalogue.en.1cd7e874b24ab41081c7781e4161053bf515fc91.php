@@ -143,7 +143,8 @@ $catalogue = new MessageCatalogue('en', array (
     'profile.flash.updated' => 'The profile has been updated.',
     'change_password.submit' => 'Change password',
     'change_password.flash.success' => 'The password has been changed.',
-    'registration.check_email' => 'An email has been sent to %email%. It contains an activation link you must click to activate your account.',
+    'registration.check_email' => 'An email has been sent to %email%. It contains an activation link you must click to activate your account.
+',
     'registration.confirmed' => 'Congrats %username%, your account is now activated.',
     'registration.back' => 'Back to the originating page.',
     'registration.submit' => 'Register',
@@ -151,7 +152,7 @@ $catalogue = new MessageCatalogue('en', array (
     'registration.email.subject' => 'Welcome %username%!',
     'registration.email.message' => 'Hello %username%!
 
-To finish activating your account - please visit %confirmationUrl%.
+To finish activating your account - please visit %confirmationUrl%
 
 This link can only be used once to validate your account.
 
@@ -159,7 +160,7 @@ Regards,
 the Team.
 ',
     'resetting.check_email' => 'An email has been sent. It contains a link you must click to reset your password.
-Note: You can only request a new password within %tokenLifetime% hours.
+Note: You can only request a new password once within %tokenLifetime% hours.
 
 If you don\'t get an email check your spam folder or try again.
 ',

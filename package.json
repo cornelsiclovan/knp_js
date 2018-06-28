@@ -1,0 +1,12 @@
+{
+  "name": "knp_js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/cornelsiclovan/knp_js.git",
+  "author": "cornel.siclovan <cornel.siclovan@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}

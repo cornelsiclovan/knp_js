@@ -57,7 +57,7 @@
      {{ parent() }}
 
     <script src="https://cdn.jsdelivr.net/sweetalert2/6.1.0/sweetalert2.min.js"></script>
-    <script src="{{ asset('assets/js/RepLogApp.js') }}"></script>
+    <script src="{{ asset('assets/dist/RepLogApp.js') }}"></script>
 
 
     <script>
@@ -65,23 +65,7 @@
         $(document).ready(function(){
             var $wrapper = $('.js-rep-log-table');
             var repLogRep = new RepLogApp($wrapper);
+
         });
      </script>
-
-    <script type="text/template" id="js-rep-log-row-template">
-        <tr data-weight="<%= totalWeightLifted %>">
-            <td><%= itemLabel %></td>
-            <td><%= reps %></td>
-            <td><%= totalWeightLifted %></td>
-            <td>
-                <a href="#"
-                   class="js-delete-rep-log"
-                   data-url="<%= links._self %>"
-                >
-                    <span class="fa fa-trash"></span>
-                </a>
-            </td>
-        </tr>
-    </script>
-
  {% endblock %}
